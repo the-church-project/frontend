@@ -8,7 +8,7 @@
 // import Blog from './pages/blog';
 // import Home from './pages/home';
 
-import { HomePage } from './pages'
+import { HomePage, LoginPage, RegisterPage, OTPPage } from './pages'
 
 
 var routes = [
@@ -18,19 +18,19 @@ var routes = [
     },
     {
         'path': '/login',
-        'component': 'Login'
+        'component': LoginPage
     },
     {
         'path': '/register',
-        'component': 'Register'
+        'component': RegisterPage
+    },
+    {
+        'path': '/otp',
+        'component': OTPPage
     },
     {
         'path': '/profile',
         'component': 'Profile'
-    },
-    {
-        'path': '/otp',
-        'component': 'Otp'
     },
     {
         'path': '/family',

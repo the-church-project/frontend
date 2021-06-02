@@ -1,5 +1,8 @@
-import CustomButton from './buttons'
+import BasicForm from './forms'
+import { Headings, CustomButton } from './basic'
 
 export {
-   CustomButton
+   CustomButton,
+   Headings,
+   BasicForm,
 }

@@ -1,29 +1,31 @@
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
 
-*{
-  font-family: 'Roboto', sans-serif;
+* {
+  font-family: "Roboto", sans-serif;
 }
 
-h1, span{
-  font-family: 'Comfortaa', cursive;
+h1,
+span {
+  font-family: "Comfortaa", cursive;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit !important;
 }
 
-a:hover{
+a:hover {
   text-decoration: none;
   color: #555 !important;
+  cursor: pointer;
 }
-.spl{
+.spl {
   display: inline-block;
 }
 .spl::after {
-  content: '';
+  content: "";
   width: 0px;
   height: 1px;
   display: block;
@@ -37,16 +39,14 @@ a:hover{
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .App {
@@ -55,49 +55,58 @@ code {
   height: 100vh;
 }
 
-.container-fluid { 
+.container-fluid {
   max-width: 720px;
 }
 
-.btn{
+.btn {
   width: 100%;
-  padding: 10px;
+  padding: 10px 25px;
   border: 2px solid #212529;
   font-weight: 600;
   font-size: 13px;
 }
 
-
 // Form css
 input {
-	border: 0 !important;
-	border-bottom: 2px solid !important;
-	border-radius: 0px !important;
-	padding-left: 2px !important;
-	padding-bottom: 4px !important;
+  border: 0 !important;
+  border-bottom: 2px solid !important;
+  border-radius: 0px !important;
+  padding-left: 2px !important;
+  padding-bottom: 4px !important;
 }
 
-input:focus-visible{
+input:focus-visible {
   box-shadow: none !important;
   outline: none;
 }
 
-label{
+label {
   font-size: 12px;
 }
 
 .form-control:focus {
-	// color: #212529;
-	// background-color: #fff;
-	// border-color: #86b7fe;
-	// outline: 0;
-	box-shadow: none;
+  // color: #212529;
+  // background-color: #fff;
+  // border-color: #86b7fe;
+  // outline: 0;
+  box-shadow: none;
 }
-.phone-code{
+.phone-code {
   width: 45px;
   padding: 0px;
   border: 0px;
   border-bottom: 2px solid;
   border-radius: 0px;
   text-align: center;
+}
+.box-shadow {
+  box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5);
+}
+.box-shadow-inset {
+  box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5) inset;
+  -webkit-box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5) inset;
+  -moz-box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5) inset;
 }

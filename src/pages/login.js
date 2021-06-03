@@ -29,7 +29,7 @@ export default class LoginPage extends React.Component {
    render() {
       return (
          <Container fluid className="d-flex flex-column ">
-            <Headings title="login" subtitle="loginnow" href="/register" className="my-auto"></Headings>
+            <Headings title="login" subtitle="or Register" href="/register" className="my-auto"></Headings>
             <BasicForm className="mt-auto" formlist={loginFormfields}>
                <CustomButton className="my-3 mt-5 d-flex align-items-center" type="submit" text="Send OTP" href="/otp">
                   <ImArrowRight2 style={{ marginLeft: "auto" }} />

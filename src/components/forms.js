@@ -6,10 +6,10 @@ import { CustomButton } from './basic'
 import OtpInput from 'react-otp-input';
 
 function OtpField(props) {
-   const [otp, setOtp] = useState(0);
    const { values } = useFormikContext();
+   const [otp, setOtp] = useState(values[props.fieldname]);
    return (
-      <div>
+      <div className="pt-2">
          <OtpInput
             containerStyle={{ justifyContent: props.justify ? props.justify : "start" }}
             numInputs={props.numinput}
@@ -18,7 +18,9 @@ function OtpField(props) {
                setOtp(val);
                values[props.fieldname] = val
             }}
-            inputStyle={{ width: "55px", marginRight: "15px", fontSize: '20px' }}
+            separator={<span>&nbsp;&nbsp;</span>}
+            inputStyle={{fontSize: '20px', width:"30px" }}
+            isDisabled={props.readonly === "readonly"}
          />
       </div>
    )
@@ -31,12 +33,12 @@ function CustomFields(props) {
          <Form.Group className="mb-3" controlId={props.id ? props.id : 'defaultForm'}>
             {props.label ? <FormLabel className="text-muted text-capitalize mb-1">{props.label}</FormLabel> : null}<br />
             <div className="d-flex flex-row">
-               <Form.Control as='select' className="phone-code" style={{ marginRight: '15px' }} {...props.formik.getFieldProps('countrycode')}>
+               <Form.Control as='select' className="phone-code" style={{ marginRight: '15px' }} {...props.formik.getFieldProps('countrycode')} readonly={props.readonly ? 'readonly' : null}>
                   <option>~</option>
                   <option selected>+91</option>
                </Form.Control>
                <Form.Control type={props.type} placeholder={props.placeholder ? props.placeholder : ""}
-                  {...props.formik.getFieldProps(props.fieldname)} />
+                  {...props.formik.getFieldProps(props.fieldname)} readonly={props.readonly ? 'readonly' : null} />
             </div>
             {reveal ? (<Fade bottom><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
             {props.helptext ? <Form.Text className="text-muted text-capitalize">{props.helptext}</Form.Text> : null}
@@ -46,7 +48,7 @@ function CustomFields(props) {
       return (
          <Form.Group className="mb-3" controlId={props.id ? props.id : 'defaultForm'}>
             {props.label ? <FormLabel className="text-muted text-capitalize mb-1">{props.label}</FormLabel> : null}<br />
-            <OtpField fieldname={props.fieldname} justify={props.justify} numinput={props.numinput}></OtpField>
+            <OtpField fieldname={props.fieldname} justify={props.justify} numinput={props.numinput} readonly={props.readonly ? 'readonly' : null}></OtpField>
             {reveal ? (<Fade bottom ><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
             {props.helptext ? <Form.Text className="text-muted text-capitalize">{props.helptext}</Form.Text> : null}
          </Form.Group>
@@ -55,7 +57,7 @@ function CustomFields(props) {
       return (
          <Form.Group className="mb-3" controlId={props.id ? props.id : 'defaultForm'}>
             {props.label ? <FormLabel className="text-muted text-capitalize mb-1">{props.label}</FormLabel> : null}<br />
-            <Form.Control type={props.type} placeholder={props.placeholder ? props.placeholder : ""}  {...props.formik.getFieldProps(props.fieldname)} />
+            <Form.Control type={props.type} placeholder={props.placeholder ? props.placeholder : ""}  {...props.formik.getFieldProps(props.fieldname)} readonly={props.readonly ? 'readonly' : null} />
             {reveal ? (<Fade bottom ><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
             {props.helptext ? <Form.Text className="text-muted text-capitalize">{props.helptext}</Form.Text> : null}
          </Form.Group>
@@ -72,7 +74,7 @@ class BasicForm extends React.Component {
       items.map((value, key) => {
          final[value.fieldname] = value.initialvalue ? value.initialvalue : ''
          if (value.type === 'phonenumber') {
-            final['countrycode'] = ''
+            final['countrycode'] = value.initialcodevalue ? value.initialcodevalue : ''
          }
          return null
       })
@@ -81,7 +83,7 @@ class BasicForm extends React.Component {
 
    render() {
       return (
-         <Formik initialValues={this.getInitialValues(this.props.formlist)} onSubmit={value => console.log(value)}
+         <Formik initialValues={this.getInitialValues(this.props.formlist)} onSubmit={this.props.onSubmit ? this.props.onSubmit : value => console.log(value)}
             validate={value => {
                let errors = {}
                if (!value.firstname) {

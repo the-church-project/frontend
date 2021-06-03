@@ -12,10 +12,10 @@ class HomePage extends React.Component {
                <Container fluid>
                   <Row className="justify-content-between position-absolute w-100" style={{ bottom: "20px" }}>
                      <Col>
-                        <CustomButton text="login" type="white" href="/login"/>
+                        <CustomButton text="login" variant="outline-dark" href="/login"/>
                      </Col>
                      <Col>
-                        <CustomButton text="Register" type="black" href="/register"/>
+                        <CustomButton text="Register" variant="dark" href="/register"/>
                      </Col>
                   </Row>
                </Container>

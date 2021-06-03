@@ -5,11 +5,11 @@ import { ImUndo } from "react-icons/im";
 
 export const CustomButton = (props) => {
    return (
-      <Link className="d-flex" to={props.href} >
+      <Link to={props.href} >
          <Button className={"text-uppercase " + props.className}
             style={props.style}
             type={props.type}
-            variant={props.type === 'white' ? "outline-dark" : 'dark'} block>
+            variant={props.variant?props.variant:"dark"} block>
             {props.text ? props.text : "test"}{props.children ? props.children : null}</Button>
       </Link>
    )

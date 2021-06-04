@@ -19,6 +19,16 @@ var registerFormfields = [
       'type': "text",
       'fieldname': "lastname"
    },
+   {
+      'label': "Enter Password",
+      'type': "password",
+      'fieldname': "password1"
+   },
+   {
+      'label': "Re-enter Password",
+      'type': "password",
+      'fieldname': "password2"
+   },
    // {
    //    'label': "OTP",
    //    'type': "otp",
@@ -35,7 +45,7 @@ export default class RegisterPage extends React.Component {
          <Container fluid className="d-flex flex-column ">
             <Headings title="Register" subtitle="or Login" href="/login" className="my-auto"></Headings>
             <BasicForm className="mt-auto" formlist={registerFormfields}>
-               <CustomButton className="my-3 mt-5 d-flex align-items-center" type="submit" text="Send OTP" href="/otp">
+               <CustomButton className="my-3 mt-5 d-flex align-items-center" type="submit" text="Submit" href="/otp">
                   <ImArrowRight2 style={{marginLeft:"auto"}} />
                </CustomButton>
             </BasicForm>

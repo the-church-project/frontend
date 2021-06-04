@@ -9,57 +9,66 @@
 // import Home from './pages/home';
 
 import {
-    HomePage,
+    CoverPage,
     LoginPage,
     RegisterPage,
     OTPPage,
     FamRegisterPage,
     ProfilePage,
-    FamilyPage
+    FamilyPage,
+    HomePage,
+    FOF,
 } from './pages'
 
 
 var routes = [
     {
-        'path': '/',
-        'component': HomePage
+        path: '/cover',
+        exact:true,
+        component: CoverPage
     },
     {
-        'path': '/login',
-        'component': LoginPage
+        path: '/login',
+        exact:true,
+        component: LoginPage
     },
     {
-        'path': '/register',
-        'component': RegisterPage
+        path: '/register',
+        exact:true,
+        component: RegisterPage
     },
     {
-        'path': '/otp',
-        'component': OTPPage
+        path: '/family-register',
+        exact:true,
+        component: FamRegisterPage
     },
     {
-        'path': '/family-register',
-        'component': FamRegisterPage
+        path: '/',
+        exact:true,
+        component: HomePage,
+        protected: true,
+        redirect: "/cover",
     },
     {
-        'path': '/profile',
-        'component': ProfilePage
+        path: '/profile',
+        exact:true,
+        component: ProfilePage,
+        protected: true,
+        redirect: "/cover",
     },
     {
-        'path': '/myfamily',
-        'component': FamilyPage
+        path: '/myfamily',
+        exact:true,
+        component: FamilyPage,
+        protected: true,
+        redirect: "/cover",
     },
     {
-        'path': '/event',
-        'component': 'Event'
-    },
-    {
-        'path': '/home',
-        'component': 'Home'
-    },
-    {
-        'path': '/blog',
-        'component': 'Blog'
-    },
+        path: '*',
+        exact:true,
+        component: FOF,
+        protected: false,
+    }
 ]
 
 export default routes;

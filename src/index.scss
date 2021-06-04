@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
 
 * {
   font-family: "Roboto", sans-serif;
@@ -13,12 +14,12 @@ span {
 
 a {
   text-decoration: none;
-  color: inherit !important;
+  // color: inherit !important;
 }
 
 a:hover {
   text-decoration: none;
-  color: #555 !important;
+  color: #555;
   cursor: pointer;
 }
 .spl {
@@ -100,6 +101,8 @@ label {
   border-radius: 0px;
   text-align: center;
 }
+
+// beels and whistles
 .box-shadow {
   box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5);
@@ -109,4 +112,126 @@ label {
   box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5) inset;
   -webkit-box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5) inset;
   -moz-box-shadow: 14px 15px 49px -14px rgba(0, 0, 0, 0.5) inset;
+}
+.grad-bg {
+  background: rgba(0, 0, 0, 0.44);
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.44) 0%,
+    rgba(255, 255, 255, 0.44) 45%,
+    rgba(255, 255, 255, 0.44) 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.44) 0%,
+    rgba(255, 255, 255, 0.44) 45%,
+    rgba(255, 255, 255, 0.44) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+//carousel
+.splide {
+  padding: 10px 0px !important;
+}
+
+.card {
+  background: none !important;
+  box-shadow: 10px 10px 40px -10px rgba(0, 0, 0, 0.2);
+  border: none;
+  img {
+    border-radius: 15px;
+    object-fit: cover;
+  }
+  .card-img-overlay {
+    border-radius: 15px;
+  }
+}
+
+//hamburger menu
+.hamburger-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 35px;
+  z-index: 2;
+
+  & button {
+    position: relative;
+    width: 30px;
+    height: 22px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+
+    & span {
+      position: absolute;
+      height: 3px;
+      background: #000;
+      width: 100%;
+      left: 0px;
+      top: 0px;
+      transition: 0.1s ease-in;
+      &:nth-child(2) {
+        top: 9px;
+      }
+      &:nth-child(3) {
+        top: 18px;
+      }
+    }
+  }
+  & [data-state="open"] {
+    & span {
+      &:first-child {
+        transform: rotate(45deg);
+        top: 10px;
+      }
+      &:nth-child(2) {
+        width: 0%;
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 10px;
+      }
+    }
+  }
+}
+
+//404
+
+#FOFcontainer {
+  font-family: "Lato", sans-serif;
+  color: #888;
+  margin: 0;
+  display: table;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+#fof {
+  display: table-cell;
+  vertical-align: middle;
+  h1 {
+    font-size: 50px;
+    display: inline-block;
+    padding-right: 12px;
+    animation: type 0.5s alternate infinite;
+  }
+}
+
+@keyframes type {
+  from {
+    box-shadow: inset -3px 0px 0px #888;
+  }
+  to {
+    box-shadow: inset -3px 0px 0px transparent;
+  }
 }

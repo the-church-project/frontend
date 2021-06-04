@@ -33,12 +33,12 @@ function CustomFields(props) {
          <Form.Group className="mb-3" controlId={props.id ? props.id : 'defaultForm'}>
             {props.label ? <FormLabel className="text-muted text-capitalize mb-1">{props.label}</FormLabel> : null}<br />
             <div className="d-flex flex-row">
-               <Form.Control as='select' className="phone-code" style={{ marginRight: '15px' }} {...props.formik.getFieldProps('countrycode')} readonly={props.readonly ? 'readonly' : null}>
+               <Form.Control as='select' className="phone-code" style={{ marginRight: '15px' }} {...props.formik.getFieldProps('countrycode')} readOnly={props.readonly ? 'readonly' : null}>
                   <option>~</option>
-                  <option selected>+91</option>
+                  <option>+91</option>
                </Form.Control>
                <Form.Control type={props.type} placeholder={props.placeholder ? props.placeholder : ""}
-                  {...props.formik.getFieldProps(props.fieldname)} readonly={props.readonly ? 'readonly' : null} />
+                  {...props.formik.getFieldProps(props.fieldname)} readOnly={props.readonly ? 'readonly' : null} />
             </div>
             {reveal ? (<Fade bottom><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
             {props.helptext ? <Form.Text className="text-muted text-capitalize">{props.helptext}</Form.Text> : null}
@@ -57,7 +57,7 @@ function CustomFields(props) {
       return (
          <Form.Group className="mb-3" controlId={props.id ? props.id : 'defaultForm'}>
             {props.label ? <FormLabel className="text-muted text-capitalize mb-1">{props.label}</FormLabel> : null}<br />
-            <Form.Control type={props.type} placeholder={props.placeholder ? props.placeholder : ""}  {...props.formik.getFieldProps(props.fieldname)} readonly={props.readonly ? 'readonly' : null} />
+            <Form.Control type={props.type} placeholder={props.placeholder ? props.placeholder : ""}  {...props.formik.getFieldProps(props.fieldname)} readOnly={props.readonly ? 'readonly' : null} />
             {reveal ? (<Fade bottom ><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
             {props.helptext ? <Form.Text className="text-muted text-capitalize">{props.helptext}</Form.Text> : null}
          </Form.Group>

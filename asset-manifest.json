@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/the-church-project/frontend/static/css/main.35d17da2.chunk.css",
+    "main.js": "/the-church-project/frontend/static/js/main.52d1f29b.chunk.js",
+    "main.js.map": "/the-church-project/frontend/static/js/main.52d1f29b.chunk.js.map",
+    "runtime-main.js": "/the-church-project/frontend/static/js/runtime-main.c15946d2.js",
+    "runtime-main.js.map": "/the-church-project/frontend/static/js/runtime-main.c15946d2.js.map",
+    "static/css/2.11c54b2c.chunk.css": "/the-church-project/frontend/static/css/2.11c54b2c.chunk.css",
+    "static/js/2.905bc767.chunk.js": "/the-church-project/frontend/static/js/2.905bc767.chunk.js",
+    "static/js/2.905bc767.chunk.js.map": "/the-church-project/frontend/static/js/2.905bc767.chunk.js.map",
+    "index.html": "/the-church-project/frontend/index.html",
+    "static/css/2.11c54b2c.chunk.css.map": "/the-church-project/frontend/static/css/2.11c54b2c.chunk.css.map",
+    "static/css/main.35d17da2.chunk.css.map": "/the-church-project/frontend/static/css/main.35d17da2.chunk.css.map",
+    "static/js/2.905bc767.chunk.js.LICENSE.txt": "/the-church-project/frontend/static/js/2.905bc767.chunk.js.LICENSE.txt",
+    "static/media/cool-background.2a310487.png": "/the-church-project/frontend/static/media/cool-background.2a310487.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c15946d2.js",
+    "static/css/2.11c54b2c.chunk.css",
+    "static/js/2.905bc767.chunk.js",
+    "static/css/main.35d17da2.chunk.css",
+    "static/js/main.52d1f29b.chunk.js"
+  ]
+}

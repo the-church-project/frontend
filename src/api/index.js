@@ -2,19 +2,19 @@
 import axios from 'axios';
 import Store from '../store'
 
-// const hostname = 'http://localhost:8000';
-const hostname = 'https://launchspace.in';
-const baseURL = `${hostname}/api/v1`;
-const baseUrl = 'https://jsonplaceholder.typicode.com/'
+const hostname = 'http://localhost:8000';
+const baseUrl = `${hostname}/api/`;
+// const testUrl = 'https://jsonplaceholder.typicode.com/'
 
 class _CHAPI {
    dispatchRequest(path, data, method = "GET") {
       let s = Store.getState();
       let headers = {
          'Content-Type': 'application/json',
+         // 'Access-Control-Allow-Origin': '*',
       }
-      if (s.auth.user != null) {
-         headers.Authorization = `Token ${s.auth.user['token']}`
+      if (s.auth.token != null) {
+         headers.Authorization = `Token ${s.auth['token']}`
       }
       const instance = axios.create({
          baseURL: baseUrl,
@@ -25,46 +25,65 @@ class _CHAPI {
          method: method,
          url: path,
          data: data
-      }).then(response => response.data)
-         .catch(error => { throw Error(error) })
+      }).then(response => (
+         {
+            data: response.data,
+            error: null,
+         }
+      )).catch(err => {
+         if (err.response.status === 404) {
+            throw new Error(`${err.config.url} not found`);
+         }
+         else if (err.response.status === 400) {
+            return {
+               data: null,
+               error: err.response.data,
+            }
+         }
+         throw err;
+      });
+         // {
+         //    data: null,
+         //    error: error,
+         // }
    }
 
-   testAPI() {
-      return this.dispatchRequest('/posts')
-   }
+   // testAPI() {
+   //    return this.dispatchRequest('/posts')
+   // }
 
    //User APIs
    login(credentials) {
-      return this.dispatchRequest('/login/', data = { ...credentials }, "POST")
+      return this.dispatchRequest('/api-token-auth/', credentials, "POST")
    }
 
    editUser(params) {
-      return this.dispatchRequest(`/user/${param.id}`, data = { ...params }, "UPDATE")
+      return this.dispatchRequest(`/core/user/${params.id}`, { ...params }, "UPDATE")
    }
 
    createUser(params) {
-      return this.dispatchRequest('/user/', data = { ...params }, 'POST')
+      return this.dispatchRequest('/user/', { ...params }, 'POST')
    }
 
    //Family APIs
    async getUserFamily() {
-      let resp = await this.dispatchRequest('/family/')
+      let resp = await this.dispatchRequest('/core/family')
       return resp
    }
 
    async creatUserFamily(params) {
-      let resp = await this.dispatchRequest('/family/', data = { ...params }, 'POST')
+      let resp = await this.dispatchRequest('/core/family/', { ...params }, 'POST')
       return resp
    }
 
    async editUserFamily(params) {
-      let resp = await this.dispatchRequest(`/family/${param.id}`, data = { ...params }, 'UPDATE')
+      let resp = await this.dispatchRequest(`/core/family/${params.id}`, { ...params }, 'UPDATE')
       return resp
    }
 
    //Blog APIs
    async getBlog() {
-      let resp = await this.dispatchRequest('/blog/')
+      let resp = await this.dispatchRequest('/reading/blog')
       return resp
    }
 

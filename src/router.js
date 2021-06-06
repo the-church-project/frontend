@@ -12,7 +12,7 @@ import {
     CoverPage,
     LoginPage,
     RegisterPage,
-    OTPPage,
+    // OTPPage,
     FamRegisterPage,
     ProfilePage,
     FamilyPage,

@@ -2,7 +2,6 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import { BasicForm, CustomButton, Headings } from '../components'
 import { ImArrowRight2 } from "react-icons/im"
-import { Link } from 'react-router-dom'
 
 var famRegisterFormfields = [
    {

@@ -2,7 +2,6 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import { BasicForm, CustomButton, Headings } from '../components'
 import { ImArrowRight2 } from "react-icons/im"
-import { Link } from 'react-router-dom'
 
 var otpFormfields = [
    {
@@ -22,7 +21,7 @@ export default class OTPPage extends React.Component {
             <Headings title={<span>OTP<br />form</span>} className="my-auto"></Headings>
             <BasicForm className="mt-auto" formlist={otpFormfields}>
                <div className="text-center text-muted my-5">
-                  <a className="text-uppercase" style={{ fontSize: "12px", fontWeight: "bold" }}>Resend OTP<br />{"00:00"}</a>
+                  <a className="text-uppercase" href="#" style={{ fontSize: "12px", fontWeight: "bold" }}>Resend OTP<br />{"00:00"}</a>
                </div>
                <CustomButton className="d-flex align-items-center w-100 mb-3 mt-5" type="submit" text="Submit" href="/family-register">
                   <ImArrowRight2 style={{ marginLeft: "auto" }} />

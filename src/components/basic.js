@@ -9,7 +9,7 @@ export const CustomButton = (props) => {
          style={props.style}
          type={props.type}
          variant={props.variant ? props.variant : "dark"}
-         href={props.href}
+         href={props.href ? props.href : null}
          block>
          {props.text ? props.text : "test"}{props.children ? props.children : null}
       </Button>
@@ -60,16 +60,16 @@ export const HumbergerMenu = props => {
          <nav data-state="closed">
             <ul>
                <li>
-                  <a href="#">Home</a>
+                  <a href="/">Home</a>
                </li>
                <li>
-                  <a href="#">Services</a>
+                  <a href="/">Services</a>
                </li>
                <li>
-                  <a href="#">About</a>
+                  <a href="/">About</a>
                </li>
                <li>
-                  <a href="#">Contact</a>
+                  <a href="/">Contact</a>
                </li>
             </ul>
          </nav>

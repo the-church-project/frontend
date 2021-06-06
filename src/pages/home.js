@@ -20,7 +20,7 @@ class HomePage extends React.Component {
    }
 
    render() {
-      const sample = [...Array(2).keys()];
+      // const sample = [...Array(2).keys()];
       return (
          <Container>
             <Headings className="mt-5" title="welcome" subtitle="Upcoming events" icon={false}></Headings>
@@ -36,7 +36,7 @@ class HomePage extends React.Component {
                      <CustomCard {...item} id={key} />
                   </Col>
                )) :
-                  <Col md={6} lg={4} className="my-2">
+                  <Col className="my-2">
                      {/* <CustomCard title="No text Notifications" /> */}
                      <h1 className="text-muted text-center w-100">No text Notifications</h1>
                   </Col>}

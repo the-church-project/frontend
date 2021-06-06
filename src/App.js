@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
-import { CoverPage } from './pages'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import routes from './router';
-import Store from './store'
 import { getLoggedInUser, logout } from './actions'
 import { ProtectedRoute } from './components'
 
@@ -11,7 +9,8 @@ class App extends React.Component {
 
 	componentDidMount() {
 		try {
-			const user = JSON.parse(localStorage.getItem('user'))
+			// const user = JSON.parse(localStorage.getItem('user'))
+			var user = null
 			if (user != null) {
 				this.props.storeUserInState(user)
 			}

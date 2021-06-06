@@ -69,6 +69,16 @@ code {
 }
 
 // Form css
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 input {
   border: 0 !important;
   border-bottom: 2px solid !important;

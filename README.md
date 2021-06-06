@@ -1,4 +1,6 @@
+![CI/CD](https://github.com/the-church-project/frontend/workflows/ReactTest/badge.svg)
 # Getting Started with Create React App
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -9,7 +9,8 @@ import {
 } from '../typesaction'
 
 const inituserState = {
-   user: null,
+   token: null,
+   user: "test_token",
 }
 
 function auth(state = inituserState, action) {
@@ -17,7 +18,8 @@ function auth(state = inituserState, action) {
       case LOGIN_SUCCESS:
          localStorage.setItem('user', JSON.stringify(action.user))
          return Object.assign({}, state, {
-            'user': action.user
+            'user': action.user,
+            'token': action.token
          })
       case LOGOUT:
          return Object.assign({}, state, { 'user': null })
@@ -41,11 +43,11 @@ function blog(state = initAppstate, action) {
             isLoading: false,
             entities: action.blog
          })
-      // case BLOG_ERROR:
-      //    return Object.assign({}, state, {
-      //       isLoading: false,
-      //       error: action.error.message
-      //    })
+      case BLOG_ERROR:
+         return Object.assign({}, state, {
+            isLoading: false,
+            error: action.error.message
+         })
       default:
          return state
    }

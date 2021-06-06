@@ -4,6 +4,8 @@ import { Formik, useFormikContext } from 'formik'
 import React, { useState } from 'react'
 import { CustomButton } from './basic'
 import OtpInput from 'react-otp-input';
+import { Redirect } from 'react-router'
+
 
 function OtpField(props) {
    const { values } = useFormikContext();
@@ -19,7 +21,7 @@ function OtpField(props) {
                values[props.fieldname] = val
             }}
             separator={<span>&nbsp;&nbsp;</span>}
-            inputStyle={{fontSize: '20px', width:"30px" }}
+            inputStyle={{ fontSize: '20px', width: "30px" }}
             isDisabled={props.readonly === "readonly"}
          />
       </div>
@@ -37,7 +39,7 @@ function CustomFields(props) {
                   <option>~</option>
                   <option>+91</option>
                </Form.Control>
-               <Form.Control type={props.type} placeholder={props.placeholder ? props.placeholder : ""}
+               <Form.Control type="number" placeholder={props.placeholder ? props.placeholder : ""}
                   {...props.formik.getFieldProps(props.fieldname)} readOnly={props.readonly ? 'readonly' : null} />
             </div>
             {reveal ? (<Fade bottom><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
@@ -66,9 +68,6 @@ function CustomFields(props) {
 }
 
 class BasicForm extends React.Component {
-   constructor(props) {
-      super(props)
-   }
    getInitialValues = (items) => {
       var final = {}
       items.map((value, key) => {
@@ -81,19 +80,35 @@ class BasicForm extends React.Component {
       return final
    }
 
+   clean(values) {
+      for (var i = 0; i < this.props.formlist.length; i++) {
+         if (this.props.formlist[i].type === "phonenumber") {
+            values[this.props.formlist[i].fieldname] = values.countrycode ? values.countrycode + values[this.props.formlist[i].fieldname] : values[this.props.formlist[i].fieldname]
+            delete values.countrycode
+         }
+      }
+      return values
+   }
+
+   handleSubmit(values) {
+      if (this.props.onSubmit) {
+         var value = this.clean(values)
+         this.props.onSubmit(values)
+         console.log(this.props.history)
+         this.props.history.push("/")
+      } else { console.log(values) }
+   }
+
    render() {
       return (
-         <Formik initialValues={this.getInitialValues(this.props.formlist)} onSubmit={this.props.onSubmit ? this.props.onSubmit : value => console.log(value)}
+         <Formik initialValues={this.getInitialValues(this.props.formlist)} onSubmit={(val) => this.handleSubmit(val)}
             validate={value => {
                let errors = {}
-               if (!value.firstname) {
-                  errors.firstname = 'Required'
-               } if (!value.secondname) {
-                  errors.secondname = 'Required'
-               } if (!value.otp || value.otp.length !== 6) {
-                  errors.otp = 'Required'
-               }
-
+               this.props.formlist.map((val) => {
+                  if (!value[val.fieldname]) {
+                     errors[val.fieldname] = 'Required'
+                  }
+               })
                return errors
             }}>
             {props => (

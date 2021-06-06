@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
 import { CustomCard } from '../components'
-import { Container } from 'react-bootstrap';
-
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
-// // or
 // import '@splidejs/splide/dist/css/themes/splide-sea-green.min.css';
-// // or
 // import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
 import { Link } from 'react-router-dom';
 
-{/* <Carousel
-               centerMode={true}
-               // centerSlidePercentage={"50%"}
-               emulateTouch={true}
-               showArrows={false}
-               showThumbs={false}
-               dynamicHeight={false}
-               showIndicators={false}
-               showStatus={false}
-               autoPlay={false}
-               stopOnHover={true}
-               onClickItem={(item, key) => console.log(item, key)}
-            >
-               <CustomCard className="mx-3" maxheight="500px"></CustomCard>
-               <CustomCard className="mx-3" maxheight="500px"></CustomCard>
-            </Carousel> */}
+// {/* <Carousel
+//    centerMode={true}
+//    emulateTouch={true}
+//    showArrows={false}
+//    showThumbs={false}
+//    dynamicHeight={false}
+//    showIndicators={false}
+//    showStatus={false}
+//    autoPlay={false}
+//    stopOnHover={true}
+//    onClickItem={(item, key) => console.log(item, key)}
+//    >
+//       <CustomCard className="mx-3" maxheight="500px"></CustomCard>
+//       <CustomCard className="mx-3" maxheight="500px"></CustomCard>
+//    </Carousel> */}
 
 
 class CustomCarousel extends Component {

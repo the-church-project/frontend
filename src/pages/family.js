@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container, Image } from 'react-bootstrap'
-import { BasicForm, CustomButton, Headings } from '../components'
-import { ImArrowRight2 } from "react-icons/im"
+import { BasicForm, CustomButton } from '../components'
 import coolimg from '../static/images/cool-background.png'
 
 
@@ -42,7 +41,7 @@ export default class FamilyPage extends React.Component {
       return (
          <Container fluid className="d-flex flex-column">
             {/* <Headings title={<span>Family<br />Card</span>} className="my-auto"></Headings> */}
-            <Image className="m-auto box-shadow" fluid fluid style={{ objectFit: 'cover', border: "7px solid white"}} src={coolimg} rounded />
+            <Image className="m-auto box-shadow" fluid style={{ objectFit: 'cover', border: "7px solid white"}} src={coolimg} rounded />
             {/* <CustomButton className="d-flex align-items-center justify-content-center py-4 w-100 mb-5" variant="outline-dark" muted text="Show QR"/> */}
             <BasicForm className="" formlist={famCreateFormfields}>
                <CustomButton className="d-flex align-items-center justify-content-center w-100 mb-3 mt-5" type="submit" variant="dark" text="Okay">

@@ -10,6 +10,7 @@ export const CustomButton = (props) => {
          type={props.type}
          variant={props.variant ? props.variant : "dark"}
          href={props.href ? props.href : null}
+         onClick={props.onClick}
          block>
          {props.text ? props.text : "test"}{props.children ? props.children : null}
       </Button>
@@ -41,7 +42,7 @@ export const CustomCard = props => {
             <Card.Text>
                {props.description ? props.description : "Click to know more"}
             </Card.Text>
-            {props.time ? <small>{"time: " + props.time}</small> : null}
+            {props.date_time ? <small>{"time: " + props.date_time}</small> : null}
          </Card.ImgOverlay>
       </Card>
    )

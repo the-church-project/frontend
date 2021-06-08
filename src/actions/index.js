@@ -1,54 +1,84 @@
 //actions
-import { LOGIN_SUCCESS, BLOG_SUCCESS, LOGOUT } from '../typesaction'
+import { authConsts, blogConsts } from '../constants'
 import CHAPI from '../api'
-import { browserHistory } from 'react-router'
+import { alertActions } from './alert'
+import { ObjTokeyValueStr } from '../utils'
 
-export const getBlog = (credentials) => {
+export const getBlog = () => {
    return async dispatch => {
-      const { results } = await CHAPI.getBlog()
-      // console.log(blogg);
-      dispatch({
-         type: BLOG_SUCCESS,
-         blog: results,
-      })
+      dispatch(request());
+      await CHAPI.getBlog()
+         .then(response => {
+            dispatch(succses(response));
+         }).catch(err => {
+            dispatch(failure(err))
+            dispatch(alertActions.error(ObjTokeyValueStr(err)));
+         });
    }
-}
 
-export function getLoggedInUser(user) {
-   return async (dispatch) => {
-      dispatch({
-         type: LOGIN_SUCCESS,
-         user: user
-      })
-   }
-}
-
-
-export function loginUser(cred, from) {
-   return async dispatch => {
-      var final = JSON.stringify(cred)
-      // console.log(final)
-      const response = await CHAPI.login(final)
-      if (response.data) {
-         dispatch({
-            type: LOGIN_SUCCESS,
-            token: response.data.token,
-            user: response.data.user
-         })
-         from.history.push("/")
-      }
-      else {
-         // console.log(JSON.stringify(response.error.response.data, null, 2))
-         alert(JSON.stringify(response.error, null, 2))
+   function request() { return { type: blogConsts.BLOG_REQUEST, } }
+   function succses(response) {
+      return {
+         type: blogConsts.BLOG_SUCCESS,
+         blog: response,
       }
    }
+   function failure(error) { return { type: blogConsts.BLOG_ERROR, error } }
 }
 
+export function registerUser(userDetails) {
+   return async dispatch => {
+      dispatch(request());
+      await CHAPI.createUser(userDetails)
+         .then(response => {
+            dispatch(succses(response));
+         }).catch(err => {
+            dispatch(failure(err))
+            dispatch(alertActions.error(ObjTokeyValueStr(err)));
+         });
+   }
 
-export function logout() {
+   function request() { return { type: authConsts.REGISTER_REQUEST, } }
+   function succses(response) {
+      return {
+         type: authConsts.REGISTER_SUCCESS,
+         blog: response,
+      }
+   }
+   function failure(error) { return { type: authConsts.REGISTER_ERROR, error } }
+}
+
+export function loginUser(cred, history) {
+   return async dispatch => {
+      dispatch(request());
+      await CHAPI.login(cred)
+         .then(response => {
+            dispatch(succses(response));
+            history.go('/')
+         }).catch(err => {
+            dispatch(failure(err))
+            console.log(err)
+            dispatch(alertActions.error(ObjTokeyValueStr(err)));
+         });
+   }
+
+   function request() { return { type: authConsts.LOGIN_REQUEST, } }
+   function succses(response) {
+      return {
+         type: authConsts.LOGIN_SUCCESS,
+         authObj: response,
+
+      }
+   }
+   function failure(error) { return { type: authConsts.LOGIN_ERROR, error } }
+}
+
+export function logout(history) {
+   console.log(history)
    return dispatch => {
       dispatch({
-         type: LOGOUT
+         type: authConsts.LOGOUT,
       })
+      history.push("/cover")
    }
 }

@@ -67,6 +67,15 @@ code {
   font-weight: 600;
   font-size: 13px;
 }
+.btn-link {
+  border: 0px;
+  padding: 0px;
+  margin: 10px 0px;
+  width: fit-content;
+}
+.alert {
+  position: absolute;
+}
 
 // Form css
 input::-webkit-outer-spin-button,
@@ -76,7 +85,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 input {
@@ -244,4 +253,13 @@ label {
   to {
     box-shadow: inset -3px 0px 0px transparent;
   }
+}
+.react-tel-input {
+  margin-right: 50px;
+  width: 100%;
+}
+
+/// utills
+.h100vh {
+  height: 100vh;
 }

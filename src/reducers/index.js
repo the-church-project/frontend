@@ -1,62 +1,107 @@
 //reducers
 import { combineReducers } from 'redux'
-import {
-   LOGIN_SUCCESS,
-   LOGOUT,
-   BLOG_LOADING,
-   BLOG_ERROR,
-   BLOG_SUCCESS
-} from '../typesaction'
+import { authConsts, alertConsts, blogConsts } from '../constants'
+import { localAuthObject } from '../utils';
+
 
 const inituserState = {
-   token: null,
-   user: "test_token",
+   token: localAuthObject ? localAuthObject.token : null,
+   user: localAuthObject ? localAuthObject.user : null,
 }
 
-function auth(state = inituserState, action) {
+function authReducer(state = inituserState, action) {
    switch (action.type) {
-      case LOGIN_SUCCESS:
-         localStorage.setItem('user', JSON.stringify(action.user))
+      case authConsts.LOGIN_REQUEST:
+         localStorage.removeItem("auth")
          return Object.assign({}, state, {
-            'user': action.user,
-            'token': action.token
+            'isLoading': true
          })
-      case LOGOUT:
-         return Object.assign({}, state, { 'user': null })
+      case authConsts.LOGIN_SUCCESS:
+         localStorage.setItem("auth", JSON.stringify(action.authObj))
+         return Object.assign({}, state, {
+            'user': action.authObj.user,
+            'token': action.authObj.token,
+            'isLoading': false
+         })
+      case authConsts.LOGIN_ERROR:
+         return Object.assign({}, state, {
+            'isLoading': false,
+            'error': action.error
+         })
+      case authConsts.LOGOUT:
+         localStorage.removeItem("auth")
+         return Object.assign({}, state, { 'user': null, 'token': null })
       default:
          return state
    }
 }
 
 const initAppstate = {
-   isLoading: true,
-   entities: [],
-   errors: []
+   isLoading: false,
+   entities: { results: null },
 }
 
-function blog(state = initAppstate, action) {
+function blogReducer(state = initAppstate, action) {
    switch (action.type) {
-      case BLOG_LOADING:
+      case blogConsts.BLOG_REQUEST:
          return Object.assign({}, state, { isLoading: true })
-      case BLOG_SUCCESS:
+      case blogConsts.BLOG_SUCCESS:
          return Object.assign({}, state, {
             isLoading: false,
             entities: action.blog
          })
-      case BLOG_ERROR:
+      case blogConsts.BLOG_ERROR:
          return Object.assign({}, state, {
             isLoading: false,
-            error: action.error.message
+            error: action.error
          })
       default:
          return state
    }
 }
 
+function registerReducer(state = {}, action) {
+   switch (action.type) {
+      case authConsts.REGISTER_REQUEST:
+         return Object.assign({}, state, { isLoading: true })
+      case authConsts.REGISTER_SUCCESS:
+         return Object.assign({}, state, {
+            isLoading: false,
+         })
+      case authConsts.REGISTER_ERROR:
+         return Object.assign({}, state, {
+            isLoading: false,
+            error: action.error
+         })
+      default:
+         return state
+   }
+}
+
+function alertReducer(state = {}, action) {
+   switch (action.type) {
+      case alertConsts.SUCCESS:
+         return {
+            type: 'alert-success',
+            message: action.message
+         };
+      case alertConsts.ERROR:
+         return {
+            type: 'alert-danger',
+            message: action.message
+         };
+      case alertConsts.CLEAR:
+         return {};
+      default:
+         return state
+   }
+}
 
 const rootReducer = combineReducers({
-   auth,
-   blog
+   auth: authReducer,
+   blog: blogReducer,
+   alert: alertReducer,
+   register: registerReducer
 })
 
 export default rootReducer

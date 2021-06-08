@@ -1,97 +1,83 @@
 //apis
 import axios from 'axios';
-import Store from '../store'
+import { localAuthObject } from '../utils';
 
 const hostname = 'http://localhost:8000';
 const baseUrl = `${hostname}/api/`;
-// const testUrl = 'https://jsonplaceholder.typicode.com/'
-
 class _CHAPI {
-   dispatchRequest(path, data, method = "GET") {
-      let s = Store.getState();
-      let headers = {
-         'Content-Type': 'application/json',
-         // 'Access-Control-Allow-Origin': '*',
-      }
-      if (s.auth.token != null) {
-         headers.Authorization = `Token ${s.auth['token']}`
-      }
+   async dispatchRequest(path, data, method = "GET") {
+      // let localAuthObject = { token: null }
       const instance = axios.create({
          baseURL: baseUrl,
          timeout: 10000,
-         headers: headers
+         headers: localAuthObject['token'] ? {
+            'Authorization': `Token ${localAuthObject['token']}`,
+         } : null,
+         validateStatus: function (status) {
+            return status < 500; // Resolve only if the status code is less than 500
+         }
       });
-      return instance({
+      return await instance({
          method: method,
          url: path,
          data: data
-      }).then(response => (
-         {
-            data: response.data,
-            error: null,
-         }
-      )).catch(err => {
-         if (err.response.status === 404) {
-            throw new Error(`${err.config.url} not found`);
-         }
-         else if (err.response.status === 400) {
-            return {
-               data: null,
-               error: err.response.data,
-            }
-         }
-         throw err;
-      });
-         // {
-         //    data: null,
-         //    error: error,
-         // }
+      }).then(response => this.handleResponse(response))
    }
 
-   // testAPI() {
-   //    return this.dispatchRequest('/posts')
-   // }
+   handleResponse(response) {
+      if (response.status < 300) {
+         return response.data
+      } else if (response.status == 401) {
+         this.logout()
+         response.data['Possible_action'] = "Try Logging in again"
+         return Promise.reject({ ...response.data, status: response.status })
+      }
+      else {
+         response.data['Possible_action'] = "Try again in some time"
+         return Promise.reject({ ...response.data, status: response.status })
+      }
+   }
 
    //User APIs
+   createUser(params) {
+      return this.dispatchRequest('/core/create-user/', params, 'POST')
+   }
+
    login(credentials) {
       return this.dispatchRequest('/api-token-auth/', credentials, "POST")
    }
 
    editUser(params) {
-      return this.dispatchRequest(`/core/user/${params.id}`, { ...params }, "UPDATE")
+      return this.dispatchRequest(`/core/user/${params.id}`, params, "UPDATE")
    }
 
-   createUser(params) {
-      return this.dispatchRequest('/user/', { ...params }, 'POST')
+   logout() {
+      localStorage.removeItem('auth')
    }
 
    //Family APIs
-   async getUserFamily() {
-      let resp = await this.dispatchRequest('/core/family')
-      return resp
+   getUserFamily() {
+      return this.dispatchRequest('/core/family')
    }
 
-   async creatUserFamily(params) {
-      let resp = await this.dispatchRequest('/core/family/', { ...params }, 'POST')
-      return resp
+   creatUserFamily(params) {
+      return this.dispatchRequest('/core/family/', params, 'POST')
    }
 
-   async editUserFamily(params) {
-      let resp = await this.dispatchRequest(`/core/family/${params.id}`, { ...params }, 'UPDATE')
-      return resp
+   editUserFamily(params) {
+      return this.dispatchRequest(`/core/family/${params.id}`, params, 'UPDATE')
    }
 
    //Blog APIs
-   async getBlog() {
-      let resp = await this.dispatchRequest('/reading/blog')
-      return resp
+   getBlog() {
+      return this.dispatchRequest('/reading/blog')
    }
 
-   async getEvent() {
-      let resp = await this.dispatchRequest('/event/')
-      return resp
+   getEvent() {
+      return this.dispatchRequest('/event/')
    }
 }
 
 const CHAPI = new _CHAPI();
 export default CHAPI
+

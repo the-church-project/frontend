@@ -1,20 +1,15 @@
 import { Route, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux';
+import { localAuthObject } from '../utils';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-   // const [protectedRedirectFrom, setprotectedRedirectFrom] = useState('')
+const ProtectedRoute = ({ component: Component, ...props }) => {
    return (
-      <Route {...rest} >
-         {(rest.user) ? <Component {...rest} /> :
+      <Route {...props} >
+         {localAuthObject.token ? <Component {...props} /> :
             <Redirect to={{
-               pathname: rest.redirect,
-               state: { from: rest.location }
+               pathname: props.redirect,
+               state: { from: props.location }
             }} />}
-         {/* {console.log(rest)} */}
       </Route>
    )
 }
-function mapStateToProps(state) {
-   return { user: state.auth.token }
-}
-export default connect(mapStateToProps,)(ProtectedRoute)
+export default ProtectedRoute

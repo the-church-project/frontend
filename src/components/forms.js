@@ -4,7 +4,8 @@ import { Formik, useFormikContext } from 'formik'
 import React, { useState } from 'react'
 import { CustomButton } from './basic'
 import OtpInput from 'react-otp-input';
-import { Redirect } from 'react-router'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/bootstrap.css'
 
 
 function OtpField(props) {
@@ -27,20 +28,47 @@ function OtpField(props) {
       </div>
    )
 }
-
+function PhoneField(props) {
+   const { values } = useFormikContext();
+   const [otp, setOtp] = useState(values[props.fieldname]);
+   return (
+      <PhoneInput
+         country={'in'}
+         prefix={"+"}
+         // {...props.formik.getFieldProps(props.fieldname)}
+         disabled={props.readonly === "readonly"}
+         onlyCountries={['in', 'kz']}
+         inputStyle={{ marginLeft: "55px", width: "100%" }}
+         onChange={(val) => {
+            setOtp(val);
+            values[props.fieldname] = val
+         }}
+         onBlur={props.onBlur}
+         value={otp}
+      />
+   )
+}
 function CustomFields(props) {
    var reveal = props.formik.touched[props.fieldname] && props.formik.errors[props.fieldname]
    if (props.type === 'phonenumber') {
       return (
+         // <Form.Group className="mb-3" controlId={props.id ? props.id : 'defaultForm'}>
+         //    {props.label ? <FormLabel className="text-muted text-capitalize mb-1">{props.label}</FormLabel> : null}<br />
+         //    <div className="d-flex flex-row">
+         //       <Form.Control as='select' className="phone-code" style={{ marginRight: '15px' }} {...props.formik.getFieldProps('countrycode')} readOnly={props.readonly ? 'readonly' : null}>
+         //          <option key="+91" value="+91">+91</option>
+         //       </Form.Control>
+         //       <Form.Control type="text" placeholder={props.placeholder ? props.placeholder : ""}
+         //          {...props.formik.getFieldProps(props.fieldname)} readOnly={props.readonly ? 'readonly' : null} />
+         //    </div>
+         //    {reveal ? (<Fade bottom><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
+         //    {props.helptext ? <Form.Text className="text-muted text-capitalize">{props.helptext}</Form.Text> : null}
+         // </Form.Group>
          <Form.Group className="mb-3" controlId={props.id ? props.id : 'defaultForm'}>
             {props.label ? <FormLabel className="text-muted text-capitalize mb-1">{props.label}</FormLabel> : null}<br />
             <div className="d-flex flex-row">
-               <Form.Control as='select' className="phone-code" style={{ marginRight: '15px' }} {...props.formik.getFieldProps('countrycode')} readOnly={props.readonly ? 'readonly' : null}>
-                  <option>~</option>
-                  <option>+91</option>
-               </Form.Control>
-               <Form.Control type="number" placeholder={props.placeholder ? props.placeholder : ""}
-                  {...props.formik.getFieldProps(props.fieldname)} readOnly={props.readonly ? 'readonly' : null} />
+               <PhoneField {...props} />
+               {/* {console.log({ ...props.formik.getFieldProps(props.fieldname) })} */}
             </div>
             {reveal ? (<Fade bottom><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
             {props.helptext ? <Form.Text className="text-muted text-capitalize">{props.helptext}</Form.Text> : null}
@@ -68,13 +96,19 @@ function CustomFields(props) {
 }
 
 class BasicForm extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         submitErrors: []
+      }
+   }
    getInitialValues = (items) => {
       var final = {}
       items.map((value, key) => {
          final[value.fieldname] = value.initialvalue ? value.initialvalue : ''
-         if (value.type === 'phonenumber') {
-            final['countrycode'] = value.initialcodevalue ? value.initialcodevalue : ''
-         }
+         // if (value.type === 'phonenumber') {
+         //    final['countrycode'] = value.initialcodevalue ? value.initialcodevalue : '+91'
+         // }
          return null
       })
       return final
@@ -82,9 +116,10 @@ class BasicForm extends React.Component {
 
    clean(values) {
       for (var i = 0; i < this.props.formlist.length; i++) {
-         if (this.props.formlist[i].type === "phonenumber") {
-            values[this.props.formlist[i].fieldname] = values.countrycode ? values.countrycode + values[this.props.formlist[i].fieldname] : values[this.props.formlist[i].fieldname]
-            delete values.countrycode
+         if (this.props.formlist[i].type === "phonenumber" && values[this.props.formlist[i].fieldname].charAt(0) !== "+") {
+            // values[this.props.formlist[i].fieldname] = values.countrycode ? values.countrycode + values[this.props.formlist[i].fieldname] : values[this.props.formlist[i].fieldname]
+            // delete values.countrycode
+            values[this.props.formlist[i].fieldname] = "+" + values[this.props.formlist[i].fieldname]
          }
       }
       return values
@@ -93,9 +128,7 @@ class BasicForm extends React.Component {
    handleSubmit(values) {
       if (this.props.onSubmit) {
          var value = this.clean(values)
-         this.props.onSubmit(values)
-         console.log(this.props.history)
-         this.props.history.push("/")
+         this.props.onSubmit(value, this.props.history)
       } else { console.log(values) }
    }
 
@@ -108,11 +141,12 @@ class BasicForm extends React.Component {
                   if (!value[val.fieldname]) {
                      errors[val.fieldname] = 'Required'
                   }
+                  return null
                })
                return errors
             }}>
             {props => (
-               <Form onSubmit={props.handleSubmit} style={this.props.style} className={"w-100 " + this.props.className}>
+               <Form onSubmit={e => { props.handleSubmit(e) }} style={this.props.style} className={"w-100 " + this.props.className}>
                   {
                      this.props.formlist.map((value, key) =>
                         <CustomFields {...value} key={key} formik={props} />

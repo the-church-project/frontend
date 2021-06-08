@@ -2,21 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import routes from './router';
-import { getLoggedInUser, logout } from './actions'
 import { ProtectedRoute } from './components'
-
+import { alertActions } from './actions/alert'
+import { history } from './utils'
 class App extends React.Component {
+	componentDidUpdate(prevProps) {
+		if (this.props.location !== prevProps.location) {
+			this.props.clearAlerts();
+		}
+	}
 
 	componentDidMount() {
-		try {
-			// const user = JSON.parse(localStorage.getItem('user'))
-			var user = null
-			if (user != null) {
-				this.props.storeUserInState(user)
-			}
-		} catch (error) {
-			console.log(error)
-		}
 		// window.gapi.load('auth2', () => {
 		//   window.gapi.auth2.init({
 		//     client_id: '960673880424-4jbcvs2t5bbraivg990oj1dhtoq615p3.apps.googleusercontent.com',
@@ -30,8 +26,12 @@ class App extends React.Component {
 	}
 
 	render() {
+		const { alert } = this.props;
 		return (
 			<div className="App">
+				{alert.message &&
+					<div className={`alert ${alert.type}`}>{alert.message}</div>
+				}
 				<Router>
 					<Switch>
 						{routes.map((item, key) => item.protected ? <ProtectedRoute key={key} {...item} /> :
@@ -43,14 +43,13 @@ class App extends React.Component {
 		);
 	}
 }
-
-const mapStateToProps = state => ({
-	auth: state.auth
+const mapStateToProps = (state) => ({
+	alert: state.alert
 })
 
-const mapDispatchToProps = dispatch => ({
-	storeUserInState: (user) => dispatch(getLoggedInUser(user)),
-	logout: () => dispatch(logout())
+const mapDispatchToProps = (dispatch) => ({
+	clearAlerts: () => dispatch(alertActions.clear)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

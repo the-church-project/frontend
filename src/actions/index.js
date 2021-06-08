@@ -74,7 +74,6 @@ export function loginUser(cred, history) {
 }
 
 export function logout(history) {
-   console.log(history)
    return dispatch => {
       dispatch({
          type: authConsts.LOGOUT,

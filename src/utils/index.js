@@ -1,4 +1,4 @@
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
 var init = null
 try {
    init = JSON.parse(localStorage.getItem('auth'))
@@ -6,7 +6,7 @@ try {
    //forget about it
 }
 export var localAuthObject = init ? init : { user: null, token: null }
-export const history = createBrowserHistory({ forceRefresh: true });
+// export const history = createBrowserHistory({ forceRefresh: true });
 export const ObjTokeyValueStr = (input) => {
    var newstr = ''
    for (let [key, value] of Object.entries(input)) {

@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import routes from './router';
 import { ProtectedRoute } from './components'
 import { alertActions } from './actions/alert'
-import { history } from './utils'
 class App extends React.Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.location !== prevProps.location) {

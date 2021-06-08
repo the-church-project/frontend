@@ -12,14 +12,14 @@ jobs:
 
       strategy:
          matrix:
-            node-version: [12.x]
+            node-version: [10.x]
 
       steps:
          - name: Checkout repository
            uses: actions/checkout@v2
 
          - name: Set up Node.js ${{ matrix.node-version }}
-           uses: actions/setup-node@v2.1.5
+           uses: actions/setup-node@v2
            with:
               node-version: ${{ matrix.node-version }}
          
@@ -31,7 +31,7 @@ jobs:
            run: npm ci
 
          - name: Build
-           run: yarn build
+           run: npm run build
 
          - name: Deploy
            env:

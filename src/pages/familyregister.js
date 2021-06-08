@@ -26,7 +26,7 @@ export default class FamRegisterPage extends React.Component {
             </div> */}
             <BasicForm className="" formlist={famRegisterFormfields}>
                <div className="text-center text-muted my-5">
-                  <a className="text-uppercase spl" style={{ fontSize: "12px", fontWeight: "bold" }}>Skip for now</a>
+                  <a className="text-uppercase spl" href="#/" style={{ fontSize: "12px", fontWeight: "bold" }}>Skip for now</a>
                </div>
                <CustomButton className="d-flex align-items-center w-100 mb-3 mt-5" variant="outline-dark" text="Create new" href="/myfamily">
                   <ImArrowRight2 style={{ marginLeft: "auto" }} />

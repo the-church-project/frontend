@@ -6,6 +6,7 @@ import { CustomButton } from './basic'
 import OtpInput from 'react-otp-input';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
+import * as Yup from 'yup'
 
 
 function OtpField(props) {
@@ -43,7 +44,7 @@ function PhoneField(props) {
             setOtp(val);
             values[props.fieldname] = val
          }}
-         onBlur={props.onBlur}
+         onBlur={props.formik.handleBlur}
          value={otp}
       />
    )
@@ -101,6 +102,7 @@ class BasicForm extends React.Component {
       this.state = {
          submitErrors: []
       }
+      // this.validationSchemaGenerator = this.validationSchemaGenerator.bind(this)
    }
    getInitialValues = (items) => {
       var final = {}
@@ -132,19 +134,31 @@ class BasicForm extends React.Component {
       } else { console.log(values) }
    }
 
+   validationSchemaGenerator(formlist) {
+      let schema = {}
+      formlist.map(item => {
+         schema[item.fieldname] = item.validation
+         return null
+      })
+      return Yup.object().shape(schema)
+   }
+
    render() {
       return (
          <Formik initialValues={this.getInitialValues(this.props.formlist)} onSubmit={(val) => this.handleSubmit(val)}
-            validate={value => {
-               let errors = {}
-               this.props.formlist.map((val) => {
-                  if (!value[val.fieldname]) {
-                     errors[val.fieldname] = 'Required'
-                  }
-                  return null
-               })
-               return errors
-            }}>
+            // validate={value => {
+            //    let errors = {}
+            //    this.props.formlist.map((val) => {
+            //       if (!value[val.fieldname]) {
+            //          errors[val.fieldname] = 'Required'
+            //       }
+            //       return null
+            //    })
+            //    return errors
+            // }}
+            validate={this.props.validate ? this.props.validate : null}
+            validationSchema={this.validationSchemaGenerator(this.props.formlist)}
+         >
             {props => (
                <Form onSubmit={e => { props.handleSubmit(e) }} style={this.props.style} className={"w-100 " + this.props.className}>
                   {

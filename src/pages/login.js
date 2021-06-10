@@ -6,18 +6,22 @@ import { connect } from 'react-redux'
 import { loginUser } from '../actions'
 import { Redirect } from 'react-router'
 import { localAuthObject } from '../utils'
+import * as Yup from 'yup'
+
 
 
 var loginFormfields = [
    {
       'label': "Phone number",
       'type': "phonenumber",
-      'fieldname': "username"
+      'fieldname': "username",
+      'validation': Yup.string().required("Phone Number is Required"),
    },
    {
       'label': "Password",
       'type': "password",
-      'fieldname': "password"
+      'fieldname': "password",
+      'validation': Yup.string().required("Required"),
    },
    // {
    //    'label': "OTP",

@@ -24,7 +24,6 @@ class HomePage extends React.Component {
          <Container>
             {/* <a onClick={this.props.logout(this.props.history)}>Logout</a> */}
             <Button variant="link" onClick={() => this.props.logout(this.props.history)}>Logout</Button>
-            { console.log(this.props)}
             <Headings className="mt-5" title="welcome" subtitle="Upcoming events" icon={false}></Headings>
             <Row>
                <Col>

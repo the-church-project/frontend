@@ -2,7 +2,8 @@
 import axios from 'axios';
 import { localAuthObject } from '../utils';
 
-const hostname = 'http://localhost:8000';
+// const hostname = 'http://localhost:8000';
+const hostname = 'http://192.168.1.9:8000';
 const baseUrl = `${hostname}/api/`;
 class _CHAPI {
    async dispatchRequest(path, data, method = "GET") {
@@ -40,7 +41,7 @@ class _CHAPI {
 
    //User APIs
    createUser(params) {
-      return this.dispatchRequest('/core/create-user/', params, 'POST')
+      return this.dispatchRequest('/core/user/', params, 'POST')
    }
 
    login(credentials) {

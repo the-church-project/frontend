@@ -26,12 +26,14 @@ export const getBlog = () => {
    function failure(error) { return { type: blogConsts.BLOG_ERROR, error } }
 }
 
-export function registerUser(userDetails) {
+export function registerUser(userDetails, history) {
    return async dispatch => {
       dispatch(request());
       await CHAPI.createUser(userDetails)
          .then(response => {
             dispatch(succses(response));
+            console.log(history)
+            history.go('/')
          }).catch(err => {
             dispatch(failure(err))
             dispatch(alertActions.error(ObjTokeyValueStr(err)));
@@ -42,7 +44,7 @@ export function registerUser(userDetails) {
    function succses(response) {
       return {
          type: authConsts.REGISTER_SUCCESS,
-         blog: response,
+         authObj: response,
       }
    }
    function failure(error) { return { type: authConsts.REGISTER_ERROR, error } }
@@ -75,9 +77,11 @@ export function loginUser(cred, history) {
 
 export function logout(history) {
    return dispatch => {
+      CHAPI.logout()
       dispatch({
          type: authConsts.LOGOUT,
       })
       history.push("/cover")
+      window.location.reload();
    }
 }

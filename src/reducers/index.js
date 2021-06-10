@@ -29,8 +29,24 @@ function authReducer(state = inituserState, action) {
             'error': action.error
          })
       case authConsts.LOGOUT:
-         localStorage.removeItem("auth")
+         // localStorage.removeItem("auth")
          return Object.assign({}, state, { 'user': null, 'token': null })
+
+      // register cases
+      case authConsts.REGISTER_REQUEST:
+         return Object.assign({}, state, { isLoading: true })
+      case authConsts.REGISTER_SUCCESS:
+         localStorage.setItem("auth", JSON.stringify(action.authObj))
+         return Object.assign({}, state, {
+            'user': action.authObj.user,
+            'token': action.authObj.token,
+            'isLoading': false
+         })
+      case authConsts.REGISTER_ERROR:
+         return Object.assign({}, state, {
+            isLoading: false,
+            error: action.error
+         })
       default:
          return state
    }
@@ -60,23 +76,11 @@ function blogReducer(state = initAppstate, action) {
    }
 }
 
-function registerReducer(state = {}, action) {
-   switch (action.type) {
-      case authConsts.REGISTER_REQUEST:
-         return Object.assign({}, state, { isLoading: true })
-      case authConsts.REGISTER_SUCCESS:
-         return Object.assign({}, state, {
-            isLoading: false,
-         })
-      case authConsts.REGISTER_ERROR:
-         return Object.assign({}, state, {
-            isLoading: false,
-            error: action.error
-         })
-      default:
-         return state
-   }
-}
+// function registerReducer(state = {}, action) {
+//    switch (action.type) {
+
+//    }
+// }
 
 function alertReducer(state = {}, action) {
    switch (action.type) {
@@ -101,7 +105,7 @@ const rootReducer = combineReducers({
    auth: authReducer,
    blog: blogReducer,
    alert: alertReducer,
-   register: registerReducer
+   // register: registerReducer
 })
 
 export default rootReducer

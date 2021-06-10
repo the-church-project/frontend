@@ -1,6 +1,7 @@
 import thunkMiddleware from 'redux-thunk'
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // const authMiddleware = storeAPI => next => action => {
 //    const state = storeAPI.getState()
@@ -12,7 +13,7 @@ import rootReducer from './reducers'
 
 const Store = createStore(
    rootReducer,
-   compose(applyMiddleware(thunkMiddleware),)
+   composeWithDevTools(applyMiddleware(thunkMiddleware),)
 )
 
 export default Store

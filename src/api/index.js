@@ -30,12 +30,12 @@ class _CHAPI {
          return response.data
       } else if (response.status === 401) {
          this.logout()
-         response.data['Possible_action'] = "Try Logging in again"
+         response.data['message'] = "Try Logging in again"
          return Promise.reject({ ...response.data, status: response.status })
       }
       else {
-         response.data['Possible_action'] = "Try again in some time"
-         return Promise.reject({ ...response.data, status: response.status })
+         // response.data['Possible_action'] = "Try again in some time"
+         return Promise.reject({ ...response.data, status: response.status })  
       }
    }
 

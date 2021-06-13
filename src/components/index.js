@@ -1,7 +1,6 @@
 import BasicForm from './forms'
-import { Headings, CustomButton, CustomCard } from './basic'
+import { Headings, CustomButton, CustomCard, Navigation } from './basic.js'
 import  CustomCarousel  from './carousel'
-import ProtectedRoute from './protectedroute'
 
 export {
    CustomButton,
@@ -9,5 +8,5 @@ export {
    CustomCard,
    CustomCarousel,
    BasicForm,
-   ProtectedRoute,
+   Navigation,
 }

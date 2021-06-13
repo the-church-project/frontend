@@ -1,7 +1,8 @@
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ImUndo } from "react-icons/im";
+import { IoHomeOutline } from "react-icons/io5";
 
 export const CustomButton = (props) => {
    return (
@@ -48,32 +49,17 @@ export const CustomCard = props => {
    )
 }
 
-export const HumbergerMenu = props => {
+export const Navigation = props => {
+   const sample = [...Array(4).keys()];
    return (
-      <div>
-         <div class="hamburger-menu">
-            <button class="burger" data-state="closed">
-               <span></span>
-               <span></span>
-               <span></span>
-            </button>
-         </div>
-         <nav data-state="closed">
-            <ul>
-               <li>
-                  <a href="/">Home</a>
-               </li>
-               <li>
-                  <a href="/">Services</a>
-               </li>
-               <li>
-                  <a href="/">About</a>
-               </li>
-               <li>
-                  <a href="/">Contact</a>
-               </li>
-            </ul>
-         </nav>
-      </div>
+      <Container fluid className="w-100" id="nav-container">
+         <Row className="my-3">
+            {sample.map((item, key) =>
+               <Col key={key} className="d-flex" xs={3}>
+                  <IoHomeOutline className="mx-auto" style={{ fontSize: "26px" }}></IoHomeOutline>
+               </Col>
+            )}
+         </Row>
+      </Container>
    )
 }

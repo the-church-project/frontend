@@ -6,6 +6,7 @@ import FamRegisterPage from './familyregister'
 import ProfilePage from "./profile"
 import FamilyPage from "./family"
 import HomePage from './home'
+import * as PageCollections from './pages.collections'
 
 export const FOF = () => {
    return (
@@ -26,4 +27,5 @@ export {
    ProfilePage,
    FamilyPage,
    HomePage,
+   PageCollections,
 }

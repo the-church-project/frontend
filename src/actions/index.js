@@ -4,6 +4,17 @@ import CHAPI from '../api'
 import { alertActions } from './alert'
 import { ObjTokeyValueStr } from '../utils'
 
+
+const handleServerError = (err, dispatch) => {
+   if (err.status !== undefined) {
+      delete err.status
+      dispatch(alertActions.error(ObjTokeyValueStr(err)));
+   }
+   else {
+      dispatch(alertActions.error("Server error try again in some time"))
+   }
+}
+
 export const getBlog = () => {
    return async dispatch => {
       dispatch(request());
@@ -12,7 +23,7 @@ export const getBlog = () => {
             dispatch(succses(response));
          }).catch(err => {
             dispatch(failure(err))
-            dispatch(alertActions.error(ObjTokeyValueStr(err)));
+            handleServerError(err, dispatch)
          });
    }
 
@@ -36,7 +47,7 @@ export function registerUser(userDetails, history) {
             history.go('/')
          }).catch(err => {
             dispatch(failure(err))
-            dispatch(alertActions.error(ObjTokeyValueStr(err)));
+            handleServerError(err, dispatch)
          });
    }
 
@@ -59,8 +70,7 @@ export function loginUser(cred, history) {
             history.go('/')
          }).catch(err => {
             dispatch(failure(err))
-            console.log(err)
-            dispatch(alertActions.error(ObjTokeyValueStr(err)));
+            handleServerError(err, dispatch)
          });
    }
 

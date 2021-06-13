@@ -36,7 +36,6 @@ function PhoneField(props) {
       <PhoneInput
          country={'in'}
          prefix={"+"}
-         // {...props.formik.getFieldProps(props.fieldname)}
          disabled={props.readonly === "readonly"}
          onlyCountries={['in', 'kz']}
          inputStyle={{ marginLeft: "55px", width: "100%" }}
@@ -69,7 +68,6 @@ function CustomFields(props) {
             {props.label ? <FormLabel className="text-muted text-capitalize mb-1">{props.label}</FormLabel> : null}<br />
             <div className="d-flex flex-row">
                <PhoneField {...props} />
-               {/* {console.log({ ...props.formik.getFieldProps(props.fieldname) })} */}
             </div>
             {reveal ? (<Fade bottom><Form.Text className="text-danger">{props.formik.errors[props.fieldname]}</Form.Text></Fade>) : null}
             {props.helptext ? <Form.Text className="text-muted text-capitalize">{props.helptext}</Form.Text> : null}
@@ -102,7 +100,6 @@ class BasicForm extends React.Component {
       this.state = {
          submitErrors: []
       }
-      // this.validationSchemaGenerator = this.validationSchemaGenerator.bind(this)
    }
    getInitialValues = (items) => {
       var final = {}
@@ -146,16 +143,6 @@ class BasicForm extends React.Component {
    render() {
       return (
          <Formik initialValues={this.getInitialValues(this.props.formlist)} onSubmit={(val) => this.handleSubmit(val)}
-            // validate={value => {
-            //    let errors = {}
-            //    this.props.formlist.map((val) => {
-            //       if (!value[val.fieldname]) {
-            //          errors[val.fieldname] = 'Required'
-            //       }
-            //       return null
-            //    })
-            //    return errors
-            // }}
             validate={this.props.validate ? this.props.validate : null}
             validationSchema={this.validationSchemaGenerator(this.props.formlist)}
          >
@@ -166,7 +153,6 @@ class BasicForm extends React.Component {
                         <CustomFields {...value} key={key} formik={props} />
                      )
                   }
-                  {/* {console.log(props)} */}
                   {this.props.children ? this.props.children : <CustomButton className="my-3" type="submit" text="Sbmit" />}
                </Form>
             )}

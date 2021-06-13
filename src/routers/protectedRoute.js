@@ -3,7 +3,7 @@ import { localAuthObject } from '../utils';
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
    return (
-      <Route {...props} >
+      <Route exact={props.exact} {...props} >
          {localAuthObject.token ? <Component {...props} /> :
             <Redirect to={{
                pathname: props.redirect,
@@ -12,4 +12,10 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
       </Route>
    )
 }
+
+ProtectedRoute.defaultProps = {
+   redirect: "/cover",
+   exact: true
+}
+
 export default ProtectedRoute

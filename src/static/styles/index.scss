@@ -172,59 +172,7 @@ label {
   }
 }
 
-//hamburger menu
-.hamburger-menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 35px;
-  z-index: 2;
-
-  & button {
-    position: relative;
-    width: 30px;
-    height: 22px;
-    border: none;
-    background: none;
-    padding: 0;
-    cursor: pointer;
-
-    & span {
-      position: absolute;
-      height: 3px;
-      background: #000;
-      width: 100%;
-      left: 0px;
-      top: 0px;
-      transition: 0.1s ease-in;
-      &:nth-child(2) {
-        top: 9px;
-      }
-      &:nth-child(3) {
-        top: 18px;
-      }
-    }
-  }
-  & [data-state="open"] {
-    & span {
-      &:first-child {
-        transform: rotate(45deg);
-        top: 10px;
-      }
-      &:nth-child(2) {
-        width: 0%;
-        opacity: 0;
-      }
-      &:nth-child(3) {
-        transform: rotate(-45deg);
-        top: 10px;
-      }
-    }
-  }
-}
-
 //404
-
 #FOFcontainer {
   font-family: "Lato", sans-serif;
   color: #888;
@@ -262,4 +210,15 @@ label {
 /// utills
 .h100vh {
   height: 100vh;
+}
+// navigation bar 
+#nav-container{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: lightgrey;
+  border-radius: 20px 20px 0px 0px;
+
+
 }

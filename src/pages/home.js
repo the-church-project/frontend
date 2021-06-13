@@ -33,7 +33,7 @@ class HomePage extends React.Component {
             <Headings className="mt-2" title="text and notifications" icon={false}></Headings>
             <Row>
                {this.props.bloglist.results ? this.props.bloglist.results.map((item, key) => (
-                  <Col md={6} lg={4} key={key} className="my-2">
+                  <Col md={6} key={key} className="my-2">
                      <CustomCard {...item} id={key} />
                   </Col>
                )) :

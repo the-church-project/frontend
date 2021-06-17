@@ -21,9 +21,8 @@ class HomePage extends React.Component {
    render() {
       // const sample = [...Array(2).keys()];
       return (
-         <Container>
-            {/* <a onClick={this.props.logout(this.props.history)}>Logout</a> */}
-            <Button variant="link" onClick={() => this.props.logout(this.props.history)}>Logout</Button>
+         <Container className="mb-6">
+            {/* <Button variant="link" onClick={() => this.props.logout(this.props.history)}>Logout</Button> */}
             <Headings className="mt-5" title="welcome" subtitle="Upcoming events" icon={false}></Headings>
             <Row>
                <Col>

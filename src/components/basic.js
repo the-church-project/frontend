@@ -56,9 +56,21 @@ export const Navigation = props => {
          <Row className="my-3">
             {sample.map((item, key) =>
                <Col key={key} className="d-flex" xs={3}>
-                  <IoHomeOutline className="mx-auto" style={{ fontSize: "26px" }}></IoHomeOutline>
+                  <Link className="mx-auto" to="/userdetails"><IoHomeOutline style={{ fontSize: "26px" }}></IoHomeOutline></Link>
                </Col>
             )}
+         </Row>
+      </Container>
+   )
+}
+
+export const TopBar = props => {
+   return (
+      <Container fluid className="w-100" id="top-container">
+         <Row className="mb-3">
+            <Col className="d-flex my-2">
+               <h1 className="w-100 text-center" style={{fontSize:"20px"}}>The church Project</h1>
+            </Col>
          </Row>
       </Container>
    )

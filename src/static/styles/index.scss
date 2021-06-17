@@ -14,12 +14,12 @@ span {
 
 a {
   text-decoration: none;
-  // color: inherit !important;
+  color: inherit ;
 }
 
 a:hover {
   text-decoration: none;
-  color: #555;
+  color: #aaa;
   cursor: pointer;
 }
 .spl {
@@ -99,6 +99,10 @@ input {
 input:focus-visible {
   box-shadow: none !important;
   outline: none;
+}
+
+input:read-only:hover {
+  cursor: not-allowed;
 }
 
 label {
@@ -211,14 +215,36 @@ label {
 .h100vh {
   height: 100vh;
 }
-// navigation bar 
-#nav-container{
+.h90vh {
+  height: 90vh;
+}
+.pb-6{
+  padding-bottom: 4rem;
+}
+.mb-6{
+  margin-bottom: 4rem;
+}
+// navigation bar
+#nav-container {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: lightgrey;
-  border-radius: 20px 20px 0px 0px;
-
-
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 1px -17px 60px -3px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: 1px -17px 60px -3px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 1px -17px 60px -3px rgba(0, 0, 0, 0.48);
 }
+#top-container {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  background-color: white;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 1px -17px 60px -3px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: 1px -17px 60px -3px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 1px -17px 60px -3px rgba(0, 0, 0, 0.48);
+}
+

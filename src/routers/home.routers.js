@@ -2,11 +2,19 @@ import {
    ProfilePage,
    FamilyPage,
    HomePage,
+   UserDetailsPage,
+   FOF,
 } from '../pages'
+import BlogDetailed  from '../pages/blogdetail'
 
 var homeRoutes = [
    {
-      path: '/profile',
+      path: '/userdetails',
+      component: UserDetailsPage,
+      protected: true,
+   },
+   {
+      path: '/myprofile',
       component: ProfilePage,
       protected: true,
    },
@@ -19,8 +27,17 @@ var homeRoutes = [
       path: '/',
       component: HomePage,
       protected: true,
-  },
-   
+   },
+   {
+      path: '/blog/:id',
+      component: BlogDetailed,
+      protected: true,
+   },
+   {
+      path: '*',
+      component: FOF,
+   }
+
 ]
 
 export default homeRoutes

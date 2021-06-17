@@ -1,6 +1,6 @@
 import BasicForm from './forms'
-import { Headings, CustomButton, CustomCard, Navigation } from './basic.js'
-import  CustomCarousel  from './carousel'
+import { Headings, CustomButton, CustomCard, Navigation, TopBar } from './basic.js'
+import CustomCarousel from './carousel'
 
 export {
    CustomButton,
@@ -9,4 +9,5 @@ export {
    CustomCarousel,
    BasicForm,
    Navigation,
+   TopBar,
 }

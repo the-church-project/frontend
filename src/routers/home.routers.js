@@ -29,7 +29,7 @@ var homeRoutes = [
       protected: true,
    },
    {
-      path: '/blog/:id',
+      path: '/blog/:slug',
       component: BlogDetailed,
       protected: true,
    },

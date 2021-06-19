@@ -74,6 +74,10 @@ class _CHAPI {
       return this.dispatchRequest('/reading/blog')
    }
 
+   getDetailedBlog(slug) {
+      return this.dispatchRequest(`/reading/blog/${slug}`)
+   }
+
    getEvent() {
       return this.dispatchRequest('/event/')
    }

@@ -16,6 +16,8 @@ export const blogConsts = {
    BLOG_REQUEST: 'blog/BLOG_REQUEST',
    BLOG_SUCCESS: 'blog/BLOG_SUCCESS',
    BLOG_ERROR: 'blog/BLOG_ERROR',
+   BLOG_SINGLE:'blog/BLOG_SINGLE',
+   BLOG_SINGLE_REMOVE:'blog/BLOG_SINGLE_REMOVE'
 }
 
 export const eventConsts = {

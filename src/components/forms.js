@@ -126,8 +126,8 @@ class BasicForm extends React.Component {
 
    handleSubmit(values) {
       if (this.props.onSubmit) {
-         var value = this.clean(values)
-         this.props.onSubmit(value, this.props.history)
+         var data = this.clean(values)
+         this.props.onSubmit({ data: data, history: this.props.history })
       } else { console.log(values) }
    }
 

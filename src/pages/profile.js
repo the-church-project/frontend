@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Image } from 'react-bootstrap'
 import { BasicForm, CustomButton } from '../components'
 import { ImArrowRight2 } from "react-icons/im"
-import { BsPeople } from "react-icons/bs"
+// import { BsPeople } from "react-icons/bs"
 
 var profileFormfields = [
    {

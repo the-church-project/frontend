@@ -18,7 +18,6 @@ var famCreateFormfields = [
       "readonly": true,
       'fieldname': "card_number",
       "initialvalue": "",
-      "readonly": true,
    },
    // {
    //    'label': "Family card Verified",

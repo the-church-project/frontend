@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { alertActions } from './actions/alert'
+import { alertActions } from './actions'
 import CompleteRouter from './routers'
 
 class App extends React.Component {

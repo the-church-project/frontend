@@ -1,21 +1,16 @@
 import React from 'react'
-import { Col, Container, Row, Button } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { CustomCard, CustomCarousel, Headings } from '../components'
 import { connect } from 'react-redux'
-import { getBlog, logout } from '../actions'
-import { withRouter } from 'react-router-dom';
+import { blogActions } from '../actions'
+import { Link, withRouter } from 'react-router-dom';
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 class HomePage extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         submitErrors: []
-      }
-   }
 
    componentDidMount() {
       this.props.getBlog()
+      // this.props.clearSelected()
    }
 
    render() {
@@ -33,7 +28,7 @@ class HomePage extends React.Component {
             <Row>
                {this.props.bloglist.results ? this.props.bloglist.results.map((item, key) => (
                   <Col md={6} key={key} className="my-2">
-                     <CustomCard {...item} id={key} />
+                     <Link to={`/blog/${item.id}`} onClick={() => this.props.setSelected({ item: item })}><CustomCard {...item} id={key} /></Link>
                   </Col>
                )) :
                   <Col className="my-2">
@@ -53,8 +48,9 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
    return {
-      getBlog: () => dispatch(getBlog()),
-      logout: (history) => dispatch(logout(history))
+      getBlog: () => dispatch(blogActions.getBlog()),
+      setSelected: (payload) => dispatch(blogActions.setSingleBlog(payload)),
+      clearSelected: () => dispatch(blogActions.clearSelected())
    }
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage))

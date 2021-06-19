@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 import { BasicForm, CustomButton, Headings } from '../components'
 import { ImArrowRight2 } from "react-icons/im"
 import { connect } from 'react-redux'
-import { loginUser } from '../actions'
+import { authActions } from '../actions'
 import { Redirect } from 'react-router'
 import { localAuthObject } from '../utils'
 import * as Yup from 'yup'
@@ -60,7 +60,6 @@ class LoginPage extends React.Component {
 // })
 
 const mapDispatchToProps = dispatch => ({
-   onSuccess: (payload, history) => dispatch(loginUser(payload, history)),
-   // logout: () => dispatch(logout())
+   onSuccess: (payload) => dispatch(authActions.loginUser(payload)),
 })
 export default connect(null, mapDispatchToProps)(LoginPage)

@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 import { BasicForm, CustomButton, Headings } from '../components'
 import { ImArrowRight2 } from "react-icons/im"
 import { connect } from 'react-redux'
-import { registerUser } from '../actions'
+import { authActions } from '../actions'
 import { Redirect } from 'react-router'
 import { localAuthObject } from '../utils'
 import * as Yup from 'yup'
@@ -82,7 +82,6 @@ class RegisterPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-   onSubmit: (payload, history) => dispatch(registerUser(payload, history)),
-   // logout: () => dispatch(logout())
+   onSubmit: (payload) => dispatch(authActions.registerUser(payload)),
 })
 export default connect(null, mapDispatchToProps)(RegisterPage)

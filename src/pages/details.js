@@ -1,6 +1,6 @@
 import { Container, ListGroup } from "react-bootstrap";
 import { Headings } from "../components";
-import { logout } from '../actions'
+import { authActions } from '../actions'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 
@@ -18,7 +18,7 @@ const UserDetailsPage = (props) => {
             </ListGroup.Item>
          </ListGroup>
          <ListGroup variant="flush" className="mt-auto mb-5">
-            <ListGroup.Item action onClick={() => props.logout(props.history)}>
+            <ListGroup.Item action onClick={() => props.logout({ history: props.history })}>
                Logout
             </ListGroup.Item>
          </ListGroup>
@@ -28,7 +28,7 @@ const UserDetailsPage = (props) => {
 
 const mapDispatchToProps = dispatch => {
    return {
-      logout: (history) => dispatch(logout(history))
+      logout: (payload) => dispatch(authActions.logout(payload))
    }
 }
 export default withRouter(connect(null, mapDispatchToProps)(UserDetailsPage))

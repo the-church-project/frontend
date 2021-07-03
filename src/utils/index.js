@@ -14,3 +14,13 @@ export const ObjTokeyValueStr = (input) => {
    }
    return newstr
 }
+
+export const getInitFormValues = (valueObj, formFieldObj) => {
+   formFieldObj.map(item => {
+      if (item.fieldname in valueObj){
+         item['initialvalue'] = item['initialvalue'] || valueObj[item.fieldname]
+      }
+      return null
+   })
+   return formFieldObj
+}
